@@ -40,7 +40,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
+          <div className="container max-w-full h-full">
             <Navbar />
             <Route exact path="/" component={Register} />
             <Route exact path="/register" component={Register} />
