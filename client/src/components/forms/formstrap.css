@@ -1,0 +1,75 @@
+/* .form-container {
+} */
+
+.div {
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
+.label-text {
+    color: rgb(1, 1, 1);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.span-text {
+    color: rgb(71, 71, 71);
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 6px;
+}
+
+.c-div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.input-c {
+    width: 24px;
+    height: 24px;
+    accent-color: #ffffff;
+}
+
+.s {
+    margin-right: 30px;
+}
+
+.input-t {
+    width: 350px;
+    height: 34px;
+    border-width: 2px;
+    border-color: rgb(131, 131, 131);
+    border-radius: 4px;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(27, 27, 27);
+    margin: 6px 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.select-o {
+    width: 350px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(27, 27, 27);
+    padding-top:3px;
+    padding-left: 6px;
+    padding-bottom: 3px;
+    border-width: 2px;
+    border-radius: 4px;
+    border-color: rgb(131, 131, 131);
+}
+
+.select-o > option {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(27, 27, 27);
+}
+
+.alt-div {
+}
+
+/* rgb(0 22 96) */

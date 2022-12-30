@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { MultiStepForm, Step } from "react-multi-form";
 import "./dashboard.css";
+import {InputStrap, HeaderLabel, OptionStrap} from "../forms/Formstrap";
+import { yn, location, cargoType, oneOptions, twoOptions, trucktype, paymentMode, daysAfterDelivery, tnc, channel } from "../forms/options";
 
 function Dashboard() {
   // onLogoutClick = (e) => {
@@ -14,241 +16,155 @@ function Dashboard() {
   // const { user } = this.props.auth;
   const [active, setActive] = React.useState(1);
 
+  const submit = e => {
+    e.preventDefault();
+    const form = e.target
+    console.log(...new FormData(form).entries())
+    console.log('submitted')
+  }
+
   return (
     <div className="container w-3/4 pt-10 mx-auto ">
-      <form>
+      <form onSubmit={submit}>
         <MultiStepForm activeStep={active}>
           <Step label="one">
-            <label>Job Type</label>
-            <div>
-              <input type="checkbox" />
-              <span>Local</span>
-            </div>
-            <div>
-              <input type="checkbox" />
-              <span>Transmit</span>
+            <div className="form-container">
+            <HeaderLabel label="JOB TYPE"/>
+            <div className="flex-div">
+            <InputStrap text="Local" type="checkbox"/>
+            <InputStrap text="Transit" type="checkbox"/>
             </div>
             {/* <div className="input-field col s6">
                   <input id="last_name" type="text" className="validate" />
-                  <label htmlFor="last_name">Last Name</label>
+                  <label label="" htmlFor="last_name">Last Name</label>
                 </div> */}
-            <label>Place Of Loading</label>
-            <div>
-              <select>
-                <option value="" disabled selected>
-                  Choose your option
-                </option>
-                <option value="Tema">Tema Port</option>
-                <option value="Takoradi">Takoradi Port</option>
-                <option value="Outside">Outside</option>
-              </select>
-            </div>
-            <label>Cargo Type</label>
-            <div>
-              <input type="radio" name="jobType" />
-              <span>Container</span>
-            </div>
-            <div>
-              <input type="radio" name="jobType" />
-              <span>Bulk</span>
-            </div>
-            <div>
-              <input type="radio" name="jobType" />
-              <span>Other</span>
+            <HeaderLabel label="Place Of Loading"/>
+            <OptionStrap options={oneOptions}/>
+            <HeaderLabel name="cargoType" label="Cargo Type"/>
+            <div className="flex-div">
+            {
+              cargoType.map((type, i) => <InputStrap key={i} name="cargoType" type="radio" text={type} /> )
+            }
             </div>
             <br />
-            PICKUP DATE
+            <HeaderLabel label="PICKUP DATE"/>
+            {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
+            <input className="input-date" type="date"/>
+          </div>
           </Step>
-
           <Step label="Two">
-            <label>PICKUP LOCATION</label>
-            <div>
-              <input type="radio" name="pickupLocation" />
-              <span>MPS</span>
+            <HeaderLabel label="PICKUP LOCATION" name="pickupLocation"/>
+            <div className="flex-div">
+              {
+              location.map((l, i) => <InputStrap key={i} name="pickupLocation" text={l} type="radio"/>) 
+              }
             </div>
-            <div>
-              <input type="radio" name="pickupLocation" />
-              <span>GJT</span>
-            </div>
-            <div>
-              <input type="radio" name="pickupLocation" />
-              <span>TBT</span>
-            </div>
-            <div>
-              <input type="radio" name="pickupLocation" />
-              <span>MAIN PORT</span>
-            </div>
-            <div>
-              <input type="radio" name="pickupLocation" />
-              <span>REFEER</span>
-            </div>
-            <div>
-              <input type="radio" name="pickupLocation" />
-              <span>AMARIS</span>
-            </div>
-            <div>
-              <input type="radio" name="pickupLocation" />
-              <span>Other</span>
-            </div>
+            
 
-            <label>DESTINATION</label>
-            <br />
-            <input type="text" placeholder="DROP OFF" />
-            <br />
-            <label>CARGO DESCRIPTION</label>
-            <br />
-            <input type="text" placeholder="" />
-            <br />
-            <label>CONTAINER SIZE</label>
-            <div>
-              <select>
-                <option value="" disabled selected>
-                  Choose your option
-                </option>
-                <option value="40ft">40ft Port</option>
-                <option value="20ft">20ft Port</option>
-                <option value="Bulk">Bulk</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+            <HeaderLabel label="DESTINATION"/>
+            <InputStrap type='text' sampletext="Drop off"/>
+            <HeaderLabel label="CARGO DESCRIPTION"/>
+            <InputStrap type='text' sampletext="Description"/>
+            <HeaderLabel label="CONTAINER SIZE"/>
+            
+              <OptionStrap options={twoOptions}/>
           </Step>
 
           <Step label="Three">
-            <label>TYPE OF TRUCK NEEDED</label>
-            <div>
-              <input type="radio" name="typeOfTruck" />
-              <span>40FT FLATBED</span>
+            <HeaderLabel name="typeOfTruck" label="TYPE OF TRUCK NEEDED"/>
+            <div className="flex-div">
+              {
+              trucktype.map((type, i) => <InputStrap key={i} name="typeOfTruck" text={type} type="radio"/>) 
+              }
             </div>
-            <div>
-              <input type="radio" name="typeOfTruck" />
-              <span>20FT FLATBED</span>
-            </div>
-            <div>
-              <input type="radio" name="typeOfTruck" />
-              <span>Both (40ft&20ft)</span>
-            </div>
-            <div>
-              <input type="radio" name="typeOfTruck" />
-              <span>SELF LOADER 20FT</span>
-            </div>
-            <div>
-              <input type="radio" name="typeOfTruck" />
-              <span>SELF LOADER 40FT</span>
-            </div>
-            <div>
-              <input type="radio" name="typeOfTruck" />
-              <span>Other</span>
-            </div>
-            <label>NUMBER OF TRUCKS</label>
-            <br />
-            <input type="text" placeholder="" />
-            <br />
-            <label>TOTAL WEIGHT TRUCK (KG)</label>
-            <br />
-            <input type="text" placeholder="" />
-            <br />
+            
+            <HeaderLabel label="NUMBER OF TRUCKS"/>
+            <InputStrap type='number' sampletext=""/>
+            <HeaderLabel label="TOTAL WEIGHT OF TRUCK (KG)"/>
+            <InputStrap type='number' sampletext=""/>
           </Step>
 
           <Step label="Four">
-            <label>DO YOU PREFER GOODS IN TRANSIT INSURANCE COVER</label>
-            <div>
-              <input type="radio" name="insuranceCover" />
-              <span>Yes</span>
+            <HeaderLabel label="DO YOU PREFER GOODS IN TRANSIT INSURANCE COVER"/>
+            <div className="flex-div">
+            {
+              yn.map((ans, i) => <InputStrap name="insuranceCover" key={i} type="radio" text={ans} /> )
+            }
             </div>
-            <div>
-              <input type="radio" name="insuranceCover" />
-              <span>No</span>
+            <HeaderLabel name="offer" label="YOUR OFFER PER TRUCK - GHC"/>
+            <InputStrap text="Amount in Ghana cedis" type="number" name="offer"/>
+
+            <HeaderLabel name="paymentMode" label="MODE OF PAYMENT"/>
+            <div className="flex-div">
+            {
+                paymentMode.map((mode, i) => <InputStrap key={i} name="paymentMode" type="radio" text={mode} /> )
+            }
             </div>
-            <label>YOUR OFFER PER TRUCK - GHC</label>
-            <br />
-            <input type="text" />
-            <br />
-            <label>MODE OF PAYMENT</label>
-            <div>
-              <input type="radio" name="paymentMode" />
-              <span>Cash</span>
+            <HeaderLabel label="PAYMENTS IN HOW MANY DAYS AFTER DELIVERY"/>
+            
+            <div className="flex-div">
+            {
+                daysAfterDelivery.map((day, d) => <InputStrap name="daysAfterDelivery" type="radio" key={d} text={day} /> )
+            }
             </div>
-            <div>
-              <input type="radio" name="paymentMode" />
-              <span>Cheque</span>
-            </div>
-            <div>
-              <input type="radio" name="paymentMode" />
-              <span>Momo</span>
-            </div>
-            <label>PAYMENTS IN HOW MANY DAYS AFTER DELIVERY</label>
-            <div>
-              <input type="radio" name="daysAfterDelivery" />
-              <span>1 DAY</span>
-            </div>
-            <div>
-              <input type="radio" name="daysAfterDelivery" />
-              <span>2-3 DAYS</span>
-            </div>
-            FREE DAYS END ( DEMURRAGE)
+            <HeaderLabel label="FREE DAYS END ( DEMURRAGE)"/>
           </Step>
 
           <Step label="Five">
-            <label>BL NUMBER</label>
-            <br />
-            <input type="text" placeholder="To monitor the free days" />
-            <br />
-            <label>CHANNEL: CRM</label>
-            <div>
-              <input type="checkbox" />
-              <span>Green</span>
+            <HeaderLabel name="blNumber" label="BL NUMBER"/>
+            <InputStrap name="blNumber" sampletext="To monitor the free days" type="text"/>
+            <HeaderLabel label="CHANNEL: CRM"/>
+            <div className="flex-div">
+              {
+                channel.map((ch, i) => <InputStrap key={i} type="checkbox" text={ch} name="channel" />)
+              }
             </div>
-            <div>
-              <input type="checkbox" />
-              <span>Yellow</span>
-            </div>
-            <div>
-              <input type="checkbox" />
-              <span>Red</span>
-            </div>
-            <div>
-              <input type="checkbox" />
-              <span>Other</span>
-            </div>
-            <label>RECEIVERS CONTACT</label>
-            <br />
-            <input type="text" placeholder="Active cell number" />
-            <br />
+            <HeaderLabel label="RECEIVERS CONTACT"/>
+            <InputStrap type="text" sampletext="Active cell number" />
           </Step>
+
           <Step label="Six">
-            <label>FULL NAME</label>
-            <br />
-            <input type="text" />
-            <br />
-            <label>COMPANY NAME</label>
-            <br />
-            <input type="text" />
-            <br />
-            <label>OFFICE ADDRESS</label>
-            <br />
-            <input type="text" />
-            <br />
-            <label>CONTACT</label>
-            <br />
-            <input type="text" />
-            <br />
-            <label>EMAIL</label>
-            <br />
-            <input type="text" />
-            <br />
+            <div className="flex-div-alt">
+              <div>
+              <HeaderLabel label="FULL NAME"/>
+              <InputStrap type="text" sampletext="Enter your full name" />
+              </div>
+              <div>
+              <HeaderLabel label="COMPANY NAME"/>
+              <InputStrap type="text" sampletext="Eg: CAS Broker" />
+              </div>
+              <div>
+              <HeaderLabel label="OFFICE ADDRESS"/>
+              <InputStrap type="text" sampletext="Address" />
+              </div>
+              <div>
+              <HeaderLabel label="CONTACT"/>
+              <InputStrap type="text" sampletext="0200000000" />
+              </div>
+              <div>
+              <HeaderLabel label="EMAIL"/>
+              <InputStrap type="text" sampletext="example@gmail.com" />
+              </div>
+            </div>
           </Step>
           <Step label="Seven ">
-            <label>TERMS AND CONDITIONS</label>
-            <div>
-              <input type="radio" name="tnc" />
-              <span>I Agree</span>
-            </div>
-            <div>
-              <input type="radio" name="tnc" />
-              <span>I Don't Agree</span>
+            <HeaderLabel name="tnc" label="TERMS AND CONDITIONS"/>
+            <div className="flex-div">
+              {
+                tnc.map((ans, i) => <InputStrap key={i} name="tnc" type="radio" text={ans} />)
+              }
             </div>
           </Step>
         </MultiStepForm>
+        {active === 7 && (
+        <button
+          className="action-btn"
+          style={{ float: "right" }}
+          type="submit"
+        >
+          submit
+        </button>
+      )}
       </form>
 
       {active !== 1 && (
@@ -265,6 +181,7 @@ function Dashboard() {
           Next
         </button>
       )}
+      
     </div>
   );
 }
