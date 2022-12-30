@@ -16,13 +16,16 @@ function Dashboard() {
   // const { user } = this.props.auth;
   const [active, setActive] = React.useState(1);
 
-  const submit = () => {
+  const submit = e => {
+    e.preventDefault();
+    const form = e.target
+    console.log(...new FormData(form).entries())
     console.log('submitted')
   }
 
   return (
     <div className="container w-3/4 pt-10 mx-auto ">
-      <form>
+      <form onSubmit={submit}>
         <MultiStepForm activeStep={active}>
           <Step label="one">
             <div className="form-container">
@@ -144,6 +147,15 @@ function Dashboard() {
             </div>
           </Step>
         </MultiStepForm>
+        {active === 7 && (
+        <button
+          className="action-btn"
+          style={{ float: "right" }}
+          type="submit"
+        >
+          submit
+        </button>
+      )}
       </form>
 
       {active !== 1 && (
@@ -160,15 +172,7 @@ function Dashboard() {
           Next
         </button>
       )}
-      {active === 7 && (
-        <button
-          className="action-btn"
-          style={{ float: "right" }}
-
-        >
-          submit
-        </button>
-      )}
+      
     </div>
   );
 }
