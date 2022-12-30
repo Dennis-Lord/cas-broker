@@ -8,7 +8,7 @@ function HeaderLabel({label, name}) {
     </div>)
 }
 
-function CheckboxStrap({text, type, name}) {
+function InputStrap({text, type, name}) {
     if (type === 'text' || type === 'number') {
         return <div className='c-div'>
             <input id={name} name={name} className='input-t' type={type}/>
@@ -38,4 +38,4 @@ function OptionStrap({options, name}) {
 
 
 
-export {HeaderLabel, CheckboxStrap, OptionStrap};
+export {HeaderLabel, InputStrap, OptionStrap};

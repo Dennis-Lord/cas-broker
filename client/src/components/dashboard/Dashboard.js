@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { MultiStepForm, Step } from "react-multi-form";
 import "./dashboard.css";
-import {CheckboxStrap, HeaderLabel, OptionStrap} from "../forms/Formstrap";
+import {InputStrap, HeaderLabel, OptionStrap} from "../forms/Formstrap";
 import { yn, location, cargoType, oneOptions, twoOptions, trucktype, paymentMode, daysAfterDelivery, tnc, channel } from "../forms/options";
 
 function Dashboard() {
@@ -31,8 +31,8 @@ function Dashboard() {
             <div className="form-container">
             <HeaderLabel label="JOB TYPE"/>
             <div className="flex-div">
-            <CheckboxStrap text="Local" type="checkbox"/>
-            <CheckboxStrap text="Transit" type="checkbox"/>
+            <InputStrap text="Local" type="checkbox"/>
+            <InputStrap text="Transit" type="checkbox"/>
             </div>
             {/* <div className="input-field col s6">
                   <input id="last_name" type="text" className="validate" />
@@ -43,7 +43,7 @@ function Dashboard() {
             <HeaderLabel name="cargoType" label="Cargo Type"/>
             <div className="flex-div">
             {
-              cargoType.map((type, i) => <CheckboxStrap key={i} name="cargoType" type="radio" text={type} /> )
+              cargoType.map((type, i) => <InputStrap key={i} name="cargoType" type="radio" text={type} /> )
             }
             </div>
             <br />
@@ -56,15 +56,15 @@ function Dashboard() {
             <HeaderLabel label="PICKUP LOCATION" name="pickupLocation"/>
             <div className="flex-div">
               {
-              location.map((l, i) => <CheckboxStrap key={i} name="pickupLocation" text={l} type="radio"/>) 
+              location.map((l, i) => <InputStrap key={i} name="pickupLocation" text={l} type="radio"/>) 
               }
             </div>
             
 
             <HeaderLabel label="DESTINATION"/>
-            <CheckboxStrap type='text' sampletext="Drop off"/>
+            <InputStrap type='text' sampletext="Drop off"/>
             <HeaderLabel label="CARGO DESCRIPTION"/>
-            <CheckboxStrap type='text' sampletext="Description"/>
+            <InputStrap type='text' sampletext="Description"/>
             <HeaderLabel label="CONTAINER SIZE"/>
             
               <OptionStrap options={twoOptions}/>
@@ -74,37 +74,37 @@ function Dashboard() {
             <HeaderLabel name="typeOfTruck" label="TYPE OF TRUCK NEEDED"/>
             <div className="flex-div">
               {
-              trucktype.map((type, i) => <CheckboxStrap key={i} name="typeOfTruck" text={type} type="radio"/>) 
+              trucktype.map((type, i) => <InputStrap key={i} name="typeOfTruck" text={type} type="radio"/>) 
               }
             </div>
             
             <HeaderLabel label="NUMBER OF TRUCKS"/>
-            <CheckboxStrap type='text' sampletext=""/>
+            <InputStrap type='number' sampletext=""/>
             <HeaderLabel label="TOTAL WEIGHT OF TRUCK (KG)"/>
-            <CheckboxStrap type='text' sampletext=""/>
+            <InputStrap type='number' sampletext=""/>
           </Step>
 
           <Step label="Four">
             <HeaderLabel label="DO YOU PREFER GOODS IN TRANSIT INSURANCE COVER"/>
             <div className="flex-div">
             {
-              yn.map((ans, i) => <CheckboxStrap name="insuranceCover" key={i} type="radio" text={ans} /> )
+              yn.map((ans, i) => <InputStrap name="insuranceCover" key={i} type="radio" text={ans} /> )
             }
             </div>
             <HeaderLabel name="offer" label="YOUR OFFER PER TRUCK - GHC"/>
-            <CheckboxStrap text="Amount in Ghana cedis" type="number" name="offer"/>
+            <InputStrap text="Amount in Ghana cedis" type="number" name="offer"/>
 
             <HeaderLabel name="paymentMode" label="MODE OF PAYMENT"/>
             <div className="flex-div">
             {
-                paymentMode.map((mode, i) => <CheckboxStrap key={i} name="paymentMode" type="radio" text={mode} /> )
+                paymentMode.map((mode, i) => <InputStrap key={i} name="paymentMode" type="radio" text={mode} /> )
             }
             </div>
             <HeaderLabel label="PAYMENTS IN HOW MANY DAYS AFTER DELIVERY"/>
             
             <div className="flex-div">
             {
-                daysAfterDelivery.map((day, d) => <CheckboxStrap name="daysAfterDelivery" type="radio" key={d} text={day} /> )
+                daysAfterDelivery.map((day, d) => <InputStrap name="daysAfterDelivery" type="radio" key={d} text={day} /> )
             }
             </div>
             <HeaderLabel label="FREE DAYS END ( DEMURRAGE)"/>
@@ -112,37 +112,46 @@ function Dashboard() {
 
           <Step label="Five">
             <HeaderLabel name="blNumber" label="BL NUMBER"/>
-            <CheckboxStrap name="blNumber" sampletext="To monitor the free days" type="text"/>
+            <InputStrap name="blNumber" sampletext="To monitor the free days" type="text"/>
             <HeaderLabel label="CHANNEL: CRM"/>
             <div className="flex-div">
               {
-                channel.map((ch, i) => <CheckboxStrap key={i} type="checkbox" text={ch} name="channel" />)
+                channel.map((ch, i) => <InputStrap key={i} type="checkbox" text={ch} name="channel" />)
               }
             </div>
             <HeaderLabel label="RECEIVERS CONTACT"/>
-            <CheckboxStrap type="text" sampletext="Active cell number" />
+            <InputStrap type="text" sampletext="Active cell number" />
           </Step>
 
           <Step label="Six">
-            <HeaderLabel label="FULL NAME"/>
-            <CheckboxStrap type="text" sampletext="Enter your full name" />
-            <HeaderLabel label="COMPANY NAME"/>
-            <CheckboxStrap type="text" sampletext="Eg: CAS Broker" />
-
-            <HeaderLabel label="OFFICE ADDRESS"/>
-            <CheckboxStrap type="text" sampletext="Address" />
-
-            <HeaderLabel label="CONTACT"/>
-            <CheckboxStrap type="text" sampletext="0200000000" />
-
-            <HeaderLabel label="EMAIL"/>
-            <CheckboxStrap type="text" sampletext="example@gmail.com" />
+            <div className="flex-div-alt">
+              <div>
+              <HeaderLabel label="FULL NAME"/>
+              <InputStrap type="text" sampletext="Enter your full name" />
+              </div>
+              <div>
+              <HeaderLabel label="COMPANY NAME"/>
+              <InputStrap type="text" sampletext="Eg: CAS Broker" />
+              </div>
+              <div>
+              <HeaderLabel label="OFFICE ADDRESS"/>
+              <InputStrap type="text" sampletext="Address" />
+              </div>
+              <div>
+              <HeaderLabel label="CONTACT"/>
+              <InputStrap type="text" sampletext="0200000000" />
+              </div>
+              <div>
+              <HeaderLabel label="EMAIL"/>
+              <InputStrap type="text" sampletext="example@gmail.com" />
+              </div>
+            </div>
           </Step>
           <Step label="Seven ">
             <HeaderLabel name="tnc" label="TERMS AND CONDITIONS"/>
             <div className="flex-div">
               {
-                tnc.map((ans, i) => <CheckboxStrap key={i} name="tnc" type="radio" text={ans} />)
+                tnc.map((ans, i) => <InputStrap key={i} name="tnc" type="radio" text={ans} />)
               }
             </div>
           </Step>

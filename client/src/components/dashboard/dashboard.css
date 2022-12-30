@@ -25,3 +25,9 @@
   font-weight: 500;
   border-radius: 4px;
 }
+
+.flex-div-alt {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
