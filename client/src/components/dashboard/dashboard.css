@@ -1,12 +1,17 @@
 .action-btn {
   background-color: #24a19c;
-  padding: 8px 20px;
+  padding: 6px 20px;
   border: 1px solid #24a19c;
   color: #fff;
-  margin: 2px 5px;
+  margin: 30px 5px;
   cursor: pointer;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   border-radius: 7px;
+}
+
+.flex-div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 6px;
 }
