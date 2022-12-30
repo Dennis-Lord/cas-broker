@@ -15,3 +15,13 @@
   flex-wrap: wrap;
   margin-top: 6px;
 }
+
+.input-date {
+  border-width: 1.6px;
+  width: 130px;
+  padding: 2px 4px;
+  border-color: gray;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+}

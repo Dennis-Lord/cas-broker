@@ -5,6 +5,7 @@ import { logoutUser } from "../../actions/authActions";
 import { MultiStepForm, Step } from "react-multi-form";
 import "./dashboard.css";
 import {CheckboxStrap, HeaderLabel, OptionStrap} from "../forms/Formstrap";
+import { yn, location, cargoType, oneOptions, twoOptions, trucktype, paymentMode, daysAfterDelivery, tnc, channel } from "../forms/options";
 
 function Dashboard() {
   // onLogoutClick = (e) => {
@@ -15,56 +16,9 @@ function Dashboard() {
   // const { user } = this.props.auth;
   const [active, setActive] = React.useState(1);
 
-  const oneOptions = [
-    'Tema Port',
-    'Tarkoradi Port',
-    'Outside'
-  ]
-
-  const cargoType = ['Container', 'Bulk', 'Other']
-
-  const twoOptions = [
-    '40ft Port',
-    '20ft Port',
-    'Bulk',
-    'Other',
-  ]
-
-  const location = [
-    'MPS', 
-  'GJT', 
-  'TBT', 
-  'MAIN PORT', 
-  'REFEER',
-  'AMARIS',
-  'Other',
-  ]
-
-  const yn = ['Yes', 'No']
-
-  const trucktype = [
-  '40FT FLATBED',
-  '20FT FLATBED',
-  'Both (40ft&20ft)',
-  'SELF LOADER 20FT',
-  'SELF LOADER 40FT',
-  'Other',
-  ]
-  
-  const paymentMode = [
-  'Cash',
-  'Cheque',
-  'Mobile Money',
-  ]
-  
-  const daysAfterDelivery = [
-  '1 day',
-  '2 - 3 days',
-  ]
-
-  const channel = ['Red', 'Yellow', 'Green', 'Other']
-
-  const tnc = ['I agree', 'I don\'t agree']
+  const submit = () => {
+    console.log('submitted')
+  }
 
   return (
     <div className="container w-3/4 pt-10 mx-auto ">
@@ -75,7 +29,7 @@ function Dashboard() {
             <HeaderLabel label="JOB TYPE"/>
             <div className="flex-div">
             <CheckboxStrap text="Local" type="checkbox"/>
-            <CheckboxStrap  text="Transit" type="checkbox"/>
+            <CheckboxStrap text="Transit" type="checkbox"/>
             </div>
             {/* <div className="input-field col s6">
                   <input id="last_name" type="text" className="validate" />
@@ -86,18 +40,20 @@ function Dashboard() {
             <HeaderLabel name="cargoType" label="Cargo Type"/>
             <div className="flex-div">
             {
-              cargoType.map((type) => <CheckboxStrap name="cargoType" type="radio" text={type} /> )
+              cargoType.map((type, i) => <CheckboxStrap key={i} name="cargoType" type="radio" text={type} /> )
             }
             </div>
             <br />
             <HeaderLabel label="PICKUP DATE"/>
+            {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
+            <input className="input-date" type="date"/>
           </div>
           </Step>
           <Step label="Two">
             <HeaderLabel label="PICKUP LOCATION" name="pickupLocation"/>
             <div className="flex-div">
               {
-              location.map((l) => <CheckboxStrap name="pickupLocation" text={l} type="radio"/>) 
+              location.map((l, i) => <CheckboxStrap key={i} name="pickupLocation" text={l} type="radio"/>) 
               }
             </div>
             
@@ -115,7 +71,7 @@ function Dashboard() {
             <HeaderLabel name="typeOfTruck" label="TYPE OF TRUCK NEEDED"/>
             <div className="flex-div">
               {
-              trucktype.map((type) => <CheckboxStrap name="typeOfTruck" text={type} type="radio"/>) 
+              trucktype.map((type, i) => <CheckboxStrap key={i} name="typeOfTruck" text={type} type="radio"/>) 
               }
             </div>
             
@@ -129,7 +85,7 @@ function Dashboard() {
             <HeaderLabel label="DO YOU PREFER GOODS IN TRANSIT INSURANCE COVER"/>
             <div className="flex-div">
             {
-              yn.map((ans) => <CheckboxStrap name="insuranceCover" type="radio" text={ans} /> )
+              yn.map((ans, i) => <CheckboxStrap name="insuranceCover" key={i} type="radio" text={ans} /> )
             }
             </div>
             <HeaderLabel name="offer" label="YOUR OFFER PER TRUCK - GHC"/>
@@ -138,18 +94,17 @@ function Dashboard() {
             <HeaderLabel name="paymentMode" label="MODE OF PAYMENT"/>
             <div className="flex-div">
             {
-                paymentMode.map((mode) => <CheckboxStrap name="paymentMode" type="radio" text={mode} /> )
+                paymentMode.map((mode, i) => <CheckboxStrap key={i} name="paymentMode" type="radio" text={mode} /> )
             }
             </div>
             <HeaderLabel label="PAYMENTS IN HOW MANY DAYS AFTER DELIVERY"/>
             
             <div className="flex-div">
             {
-                daysAfterDelivery.map((day) => <CheckboxStrap name="daysAfterDelivery" type="radio" text={day} /> )
+                daysAfterDelivery.map((day, d) => <CheckboxStrap name="daysAfterDelivery" type="radio" key={d} text={day} /> )
             }
             </div>
             <HeaderLabel label="FREE DAYS END ( DEMURRAGE)"/>
-            
           </Step>
 
           <Step label="Five">
@@ -158,12 +113,13 @@ function Dashboard() {
             <HeaderLabel label="CHANNEL: CRM"/>
             <div className="flex-div">
               {
-                channel.map(ch => <CheckboxStrap type="checkbox" text={ch} name="channel" />)
+                channel.map((ch, i) => <CheckboxStrap key={i} type="checkbox" text={ch} name="channel" />)
               }
             </div>
             <HeaderLabel label="RECEIVERS CONTACT"/>
             <CheckboxStrap type="text" sampletext="Active cell number" />
           </Step>
+
           <Step label="Six">
             <HeaderLabel label="FULL NAME"/>
             <CheckboxStrap type="text" sampletext="Enter your full name" />
@@ -183,7 +139,7 @@ function Dashboard() {
             <HeaderLabel name="tnc" label="TERMS AND CONDITIONS"/>
             <div className="flex-div">
               {
-                tnc.map(ans => <CheckboxStrap name="tnc" type="radio" text={ans} />)
+                tnc.map((ans, i) => <CheckboxStrap key={i} name="tnc" type="radio" text={ans} />)
               }
             </div>
           </Step>
@@ -202,6 +158,15 @@ function Dashboard() {
           style={{ float: "right" }}
         >
           Next
+        </button>
+      )}
+      {active === 7 && (
+        <button
+          className="action-btn"
+          style={{ float: "right" }}
+
+        >
+          submit
         </button>
       )}
     </div>
