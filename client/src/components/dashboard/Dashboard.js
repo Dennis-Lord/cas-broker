@@ -5,7 +5,7 @@ import { logoutUser } from "../../actions/authActions";
 import { MultiStepForm, Step } from "react-multi-form";
 import "./dashboard.css";
 import {InputStrap, HeaderLabel, OptionStrap} from "../forms/Formstrap";
-import { yn, location, cargoType, oneOptions, twoOptions, trucktype, paymentMode, daysAfterDelivery, tnc, channel } from "../forms/options";
+import { yn, location, cargoType, oneOptions, twoOptions, trucktype, paymentMode, daysAfterDelivery, tnc, channel,disclaimer } from "../forms/options";
 
 function Dashboard() {
   // onLogoutClick = (e) => {
@@ -30,8 +30,31 @@ function Dashboard() {
   }
 
   return (
-    <div className="container w-3/4 pt-10 mx-auto ">
-      <form method="post" onSubmit={submit} defaultValue>
+    <div className="container w-4/5 pt-5 mx-auto ">
+      {/* <div className= "bg-white w-1/5 fixed flex-col shadow-md top-13  left-5 rounded-lg p-2 border">
+        <p className="font-bold mb-1 text-sm ml-1 justify-center">Real Time Cargo Monitoring</p>
+      <img alt="cas-broker-flyer" src="flyer.jpeg" className="rounded-lg "/>
+      <div className="flex items-center mt-2 ml-2">
+      </div>
+      <div className="flex items-center mt-2 ml-2 flex-wrap">
+        <p className="text-sm font-semibold ">Visit us: </p>
+        <a className="font-sm font-medium text-gray-700 text-sm ml-1" href="https://www.casbroker.com">www.casbroker.com</a>
+      </div>
+      <div className="flex items-center mt-2 ml-2">
+        <p className="text-sm font-medium">Cell:</p>
+        <p className="font-medium text-gray-700 text-sm ml-1">0546664009</p>
+      </div>
+      <div className="flex  items-center mt-2 ml-2">
+        <p className="font-medium text-gray-700 text-sm ml-1">info@casbroker.com</p>
+      </div>
+      </div>
+      <div className= "bg-white w-1/5 shadow-md fixed flex-col top-13 right-5 rounded-lg p-2 border">
+        <p className="font-bold text-xl ">Disclaimer</p>
+        <p className="font-medium text-xs text-gray-700 ">
+          {disclaimer}
+        </p>
+      </div> */}
+      <form method="post" onSubmit={submit} defaultValue className="shadow-md">
         <MultiStepForm activeStep={active}>
           <Step label="one">
             <div className="form-container">
@@ -52,7 +75,6 @@ function Dashboard() {
               cargoType.map((type, i) => <InputStrap key={i} name="cargoType" type="radio" text={type} /> )
             }
             </div>
-            <br />
             <HeaderLabel label="Pickup date"/>
             <InputStrap type="date" name="date" />
           </div>
@@ -172,7 +194,7 @@ function Dashboard() {
       )}
       </form>
 
-      {active !== 1 && (
+      {active !== 1 && active!==7 && (
         <button className="action-btn" onClick={() => setActive(active - 1)}>
           Previous
         </button>

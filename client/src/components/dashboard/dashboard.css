@@ -17,6 +17,18 @@ form {
   border-radius: 7px;
 }
 
+.action-btn-alt {
+  background-color: #24a19c;
+  padding: 6px 20px;
+  border: 1px solid #24a19c;
+  color: #fff;
+  margin: 30px 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 7px;
+}  
+
 .flex-div {
   display: flex;
   flex-wrap: wrap;
