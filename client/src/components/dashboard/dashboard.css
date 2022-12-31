@@ -1,3 +1,10 @@
+form {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+  min-height: 80vh;
+}
+
 .action-btn {
   background-color: #24a19c;
   padding: 6px 20px;

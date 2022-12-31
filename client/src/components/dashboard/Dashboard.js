@@ -17,141 +17,146 @@ function Dashboard() {
   const [active, setActive] = React.useState(1);
 
   const submit = e => {
+    // Prevent the browser from reloading the page
     e.preventDefault();
-    const form = e.target
-    console.log(...new FormData(form).entries())
-    console.log('submitted')
+
+    // Read the form data
+    const newForm = e.target;
+    const formData = new FormData(newForm);
+
+    // Or you can work with it as a plain object:
+    const formJson = Object.fromEntries(formData.entries());
+    console.log(formJson);
   }
 
   return (
     <div className="container w-3/4 pt-10 mx-auto ">
-      <form onSubmit={submit}>
+      <form method="post" onSubmit={submit} defaultValue>
         <MultiStepForm activeStep={active}>
           <Step label="one">
             <div className="form-container">
-            <HeaderLabel label="JOB TYPE"/>
-            <div className="flex-div">
-            <InputStrap text="Local" type="checkbox"/>
-            <InputStrap text="Transit" type="checkbox"/>
+            <HeaderLabel label="Job Type"/>
+            <div>
+            <InputStrap text="Local"  name="jobType" type="checkbox"/>
+            <InputStrap text="Transit" name="jobType" type="checkbox"/>
             </div>
             {/* <div className="input-field col s6">
                   <input id="last_name" type="text" className="validate" />
                   <label label="" htmlFor="last_name">Last Name</label>
                 </div> */}
             <HeaderLabel label="Place Of Loading"/>
-            <OptionStrap options={oneOptions}/>
+            <OptionStrap name="placeOfLoading" options={oneOptions}/>
             <HeaderLabel name="cargoType" label="Cargo Type"/>
-            <div className="flex-div">
+            <div>
             {
               cargoType.map((type, i) => <InputStrap key={i} name="cargoType" type="radio" text={type} /> )
             }
             </div>
             <br />
-            <HeaderLabel label="PICKUP DATE"/>
-            {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
-            <input className="input-date" type="date"/>
+            <HeaderLabel label="Pickup date"/>
+            <InputStrap type="date" name="date" />
           </div>
           </Step>
           <Step label="Two">
-            <HeaderLabel label="PICKUP LOCATION" name="pickupLocation"/>
-            <div className="flex-div">
+            <HeaderLabel label="Pickup location" id="pickupLocation"/>
+            <div>
               {
               location.map((l, i) => <InputStrap key={i} name="pickupLocation" text={l} type="radio"/>) 
               }
             </div>
             
 
-            <HeaderLabel label="DESTINATION"/>
-            <InputStrap type='text' sampletext="Drop off"/>
-            <HeaderLabel label="CARGO DESCRIPTION"/>
-            <InputStrap type='text' sampletext="Description"/>
-            <HeaderLabel label="CONTAINER SIZE"/>
-            
-              <OptionStrap options={twoOptions}/>
+            <HeaderLabel label="Destination"/>
+            <InputStrap name="destination" type='text' sampletext="Drop off"/>
+           
+            <HeaderLabel label="Cargo description"/>
+            <InputStrap name="cargoDescription" type='text' sampletext="Description"/>
+
+            <HeaderLabel label="Container size"/>
+              <OptionStrap name="containerSize" options={twoOptions}/>
           </Step>
 
           <Step label="Three">
-            <HeaderLabel name="typeOfTruck" label="TYPE OF TRUCK NEEDED"/>
-            <div className="flex-div">
+            <HeaderLabel name="typeOfTruck" label="Type of truck needed"/>
+            <div>
               {
               trucktype.map((type, i) => <InputStrap key={i} name="typeOfTruck" text={type} type="radio"/>) 
               }
             </div>
             
-            <HeaderLabel label="NUMBER OF TRUCKS"/>
-            <InputStrap type='number' sampletext=""/>
-            <HeaderLabel label="TOTAL WEIGHT OF TRUCK (KG)"/>
-            <InputStrap type='number' sampletext=""/>
+            <HeaderLabel label="Number of trucks"/>
+            <InputStrap type='number' name="numberOfTrucks" sampletext=""/>
+            <HeaderLabel label="Total weight of truck (kg)"/>
+            <InputStrap type='number' name="totalWeightOfTruck" sampletext=""/>
           </Step>
 
           <Step label="Four">
-            <HeaderLabel label="DO YOU PREFER GOODS IN TRANSIT INSURANCE COVER"/>
-            <div className="flex-div">
+            <HeaderLabel label="Do you prefer goods in transit insurance cover"/>
+            <div>
             {
               yn.map((ans, i) => <InputStrap name="insuranceCover" key={i} type="radio" text={ans} /> )
             }
             </div>
-            <HeaderLabel name="offer" label="YOUR OFFER PER TRUCK - GHC"/>
-            <InputStrap text="Amount in Ghana cedis" type="number" name="offer"/>
+            <HeaderLabel name="offer" label="Your offer per truck - GHC"/>
+            <InputStrap text="Amount in Ghana cedis" type="number" name="amountOffered"/>
 
-            <HeaderLabel name="paymentMode" label="MODE OF PAYMENT"/>
-            <div className="flex-div">
+            <HeaderLabel name="paymentMode" label="Mode of payment"/>
+            <div>
             {
-                paymentMode.map((mode, i) => <InputStrap key={i} name="paymentMode" type="radio" text={mode} /> )
+                paymentMode.map((mode, i) => <InputStrap key={i} name="modeOfPayment" type="radio" text={mode} /> )
             }
             </div>
-            <HeaderLabel label="PAYMENTS IN HOW MANY DAYS AFTER DELIVERY"/>
+            <HeaderLabel label="Payments in how many days after delivery"/>
             
-            <div className="flex-div">
+            <div>
             {
                 daysAfterDelivery.map((day, d) => <InputStrap name="daysAfterDelivery" type="radio" key={d} text={day} /> )
             }
             </div>
-            <HeaderLabel label="FREE DAYS END ( DEMURRAGE)"/>
+            <HeaderLabel label="Free days end ( DEMURRAGE)"/>
+            <InputStrap type="date" name="freeDaysEnd"/>
           </Step>
 
           <Step label="Five">
-            <HeaderLabel name="blNumber" label="BL NUMBER"/>
+            <HeaderLabel name="blNumber" label="BL number"/>
             <InputStrap name="blNumber" sampletext="To monitor the free days" type="text"/>
-            <HeaderLabel label="CHANNEL: CRM"/>
-            <div className="flex-div">
+            <HeaderLabel label="Channel: CRM"/>
+            <div>
               {
-                channel.map((ch, i) => <InputStrap key={i} type="checkbox" text={ch} name="channel" />)
+                channel.map((ch, i) => <InputStrap key={i} type="checkbox" text={ch} name="channel"/>)
               }
             </div>
-            <HeaderLabel label="RECEIVERS CONTACT"/>
-            <InputStrap type="text" sampletext="Active cell number" />
+            <HeaderLabel label="Recievers contact"/>
+            <InputStrap name="recieversContact" type="text" sampletext="Active cell number" />
           </Step>
 
           <Step label="Six">
-            <div className="flex-div-alt">
               <div>
-              <HeaderLabel label="FULL NAME"/>
-              <InputStrap type="text" sampletext="Enter your full name" />
+              <HeaderLabel label="Full name"/>
+              <InputStrap name="fullname" type="text" sampletext="Enter your full name" />
               </div>
               <div>
-              <HeaderLabel label="COMPANY NAME"/>
-              <InputStrap type="text" sampletext="Eg: CAS Broker" />
+              <HeaderLabel label="Company name"/>
+              <InputStrap name="companyName" type="text" sampletext="Eg: CAS Broker" />
               </div>
               <div>
-              <HeaderLabel label="OFFICE ADDRESS"/>
-              <InputStrap type="text" sampletext="Address" />
+              <HeaderLabel label="Office address"/>
+              <InputStrap name="officeAddress" type="text" sampletext="Address" />
               </div>
               <div>
-              <HeaderLabel label="CONTACT"/>
-              <InputStrap type="text" sampletext="0200000000" />
+              <HeaderLabel label="Contact"/>
+              <InputStrap name="contact" type="text" sampletext="0200000000" />
               </div>
               <div>
-              <HeaderLabel label="EMAIL"/>
-              <InputStrap type="text" sampletext="example@gmail.com" />
+              <HeaderLabel label="Email"/>
+              <InputStrap name="email" type="text" sampletext="example@gmail.com" />
               </div>
-            </div>
           </Step>
           <Step label="Seven ">
-            <HeaderLabel name="tnc" label="TERMS AND CONDITIONS"/>
-            <div className="flex-div">
+            <HeaderLabel label="Terms and conditions"/>
+            <div>
               {
-                tnc.map((ans, i) => <InputStrap key={i} name="tnc" type="radio" text={ans} />)
+                tnc.map((ans, i) => <InputStrap key={i} name="agreementOfTermsAndConditions" type="radio" text={ans} />)
               }
             </div>
           </Step>

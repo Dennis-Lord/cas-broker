@@ -6,33 +6,10 @@
     margin-bottom: 8px;
 }
 
-.label-text {
-    color: rgb(1, 1, 1);
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.span-text {
-    color: rgb(71, 71, 71);
-    font-size: 14px;
-    font-weight: 500;
-    margin-left: 6px;
-}
-
 .c-div {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
-}
-
-.input-c {
-    width: 24px;
-    height: 24px;
-    accent-color: #ffffff;
-}
-
-.s {
-    margin-right: 30px;
 }
 
 .input-t {
@@ -62,14 +39,3 @@
     border-radius: 4px;
     border-color: rgb(131, 131, 131);
 }
-
-.select-o > option {
-    font-size: 14px;
-    font-weight: 500;
-    color: rgb(27, 27, 27);
-}
-
-.alt-div {
-}
-
-/* rgb(0 22 96) */

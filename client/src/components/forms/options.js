@@ -50,5 +50,6 @@ const oneOptions = [
 
 const channel = ['Red', 'Yellow', 'Green', 'Other']
 
-const tnc = ['I agree', 'I don\'t agree']  
+const tnc = ['I agree', 'I don\'t agree'] 
+ 
 export {oneOptions, trucktype, twoOptions, paymentMode, daysAfterDelivery,location, yn, cargoType, tnc, channel}
